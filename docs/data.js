@@ -1,6 +1,6 @@
 window.DATA = {
   "repo": "https://github.com/Pineovex/c-study",
-  "generatedAt": "2026-11-23",
+  "generatedAt": "2026-11-24",
   "groups": [
     {
       "cat": "STL 容器",
@@ -88,8 +88,8 @@ window.DATA = {
       "cat": "STL 容器",
       "title": "迭代器",
       "desc": "像指针一样遍历容器：begin() 指向首元素、end() 指向最后一个元素的再下一个位置，取值要解引用。",
-      "lines": 17,
-      "code": "#include <iostream>\n#include <vector>\nusing namespace std;\n//迭代器 遍历容器 类似指针\n//用对应容器的迭代器 引入对应头文件 如vector 迭代器示例\n//.begin()起始点 与.end()指向最后值的下一个位置（已不属于容器）\n\n\nint main() {\n    vector<int>arr = { 1,3,4,5 };\n    vector<int>::iterator it;\n    \n    for (it = arr.begin();it != arr.end();it++) {\n        cout << *it<<endl;//访问迭代器的值时需要*解引用\n    }\n\n}"
+      "lines": 43,
+      "code": "#include <iostream>\n#include <vector>\nusing namespace std;\n//迭代器 遍历容器 类似指针\n//用对应容器的迭代器 引入对应头文件 如vector 迭代器示例\n\n//有的数据非线性 如二叉树 此时就可以用迭代器\n\nint main() {\n    vector<int>arr = { 1,3,4,5 };\n    vector<int>::iterator it;//it类似指针 也可用auto it（auto会自动判断类型）\n    \n    for (it = arr.begin();it != arr.end();it++) {\n        cout << *it<<endl;//访问迭代器的值时需要*解引用\n    }\n    //当你对容器不够熟练时 最好不要用迭代器操作容器 除了遍历和访问的操作\n    //否则可能有问题\n    //如下面两个例子\n    //1.\n    vector<int>b = { 1,2,3,4,5 };\n    for (auto k = b.begin();k != b.end();k++) {\n        if (*k == 2 || *k == 3)//目的是删除2和3\n            b.erase(k);\n    }//但b={1,3,4,5} \n     //原因是当2删除后容器自动变小 k从指向2到指向3 但本次循环的删除操作已经进行\n     //接着迭代器向后偏移 指向4\n    \n    //2.为不可运行例子\n    //vector<int>c = { 1,2,3,4 };\n    //for (auto k = c.begin();k != c.end();k++) {\n    //    if (*k == 4) //想要删除4\n    //        b.erase(k);\n    //}此时迭代器指向4 当删除4后 容器变小 迭代器指向end() 再进行迭代器++的操作就越界了 会引发崩溃\n    \n    //.begin()起始点 与.end()指向最后值的下一个位置（已不属于容器）\n    //.rbegin()反向迭代器 .rend()反向为迭代器（end与rend指向都为无意义的值 注意不要解引用 不可访问）\n    /* 迭代器+整形 将迭代器向后移动（类似有-，++，--）\n        迭代器-迭代器：两个迭代器的距离\n        prev(it):返回it的前一个迭代器\n        next(it):返回it的后一个迭代器\n        不是所有容器都有全部的迭代器功能（set不能用迭代器相减算距离）\n    */\n}"
     },
     "map+pair.cpp": {
       "file": "map+pair.cpp",
@@ -120,8 +120,8 @@ window.DATA = {
       "cat": "STL 容器",
       "title": "vector 动态数组",
       "desc": "push_back / pop_back / insert / erase，以及 unique 相邻去重的正确用法（先去重先排序）。",
-      "lines": 60,
-      "code": "#include <iostream>\n#include <string>\n#include <vector>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    vector<int>arr = { 1,12,12 };\n    arr.push_back(55);//向最后插入\n    for (int x : arr) {\n        cout << x<<\" \";\n    }\n    cout <<endl<< \"-------------------\" << endl;\n    arr.pop_back();//删除最后的内容\n    for (int x : arr) {\n        cout << x << \" \";\n    }\n    cout <<endl<< \"-------------------\" << endl;\n    arr.insert(arr.begin() + 1, 2);//insert(地址+偏移,插入的数字)在哪个位置插入一个数\n    for (int x : arr) {\n        cout << x << \" \";\n        \n    }\n    cout <<endl<< \"-------------------\" << endl;\n    arr.insert(arr.begin(), 3);\n    for (int x : arr) {\n        cout << x << \" \";\n    }\n\n    cout <<endl<< \"-------------------\" << endl;\n    arr.erase(arr.begin());//擦除数组地址中的数据\n    for (int x : arr) {\n        cout << x << \" \";\n    }\n    cout <<endl<< \"-------------------\" << endl;\n    arr.erase(arr.begin()+1, arr.end());//擦除区域的数据\n    for (int x : arr) {\n        cout << x << \" \";\n    }\n    cout <<endl<< \"-------------------\" << endl;\n\n    vector<int>s = { 1,1,1,2,2,2,1,3,1,4,5,5,6,7 };//去除相邻重复元素，不相邻不可去除\n    s.erase(unique(s.begin(), s.end()), s.end());//使用了algorithm\n    for (int x : s) {\n        cout << x << \" \";\n    }\n    cout <<endl<< \"-------------------\" << endl;\n\n    s = { 1,1,1,2,2,2,1,3,4,5,5,6,7 };\n    sort(s.begin(),s.end());//若想去重先用sort排序;\n    //使用了algorithm\n    auto it=unique(s.begin(), s.end());\n    s.erase(it,s.end());\n    for (int x : s) {\n        cout << x << \" \";\n    }\n    cout <<endl<< \"-------------------\" << endl;\n  \n}"
+      "lines": 63,
+      "code": "#include <iostream>\n#include <string>\n#include <vector>\n#include <algorithm>\n\nusing namespace std;\n\nint main() {\n    vector<int>aa(100, 1);//定义一个长度为100 初始值为1的数组\n    vector<int>ab(100,1);//定义一个长度为100 初始值为1的数组\n    vector<vector<int>>ac(100,vector<int>());//定义一个行100 不定列的数组\n    vector<int>arr = { 1,12,12 };\n    arr.push_back(55);//向最后插入\n    for (int x : arr) {\n        cout << x<<\" \";\n    }\n    cout <<endl<< \"-------------------\" << endl;\n    arr.pop_back();//删除最后的内容\n    for (int x : arr) {\n        cout << x << \" \";\n    }\n    cout <<endl<< \"-------------------\" << endl;\n    arr.insert(arr.begin() + 1, 2);//insert(地址+偏移,插入的数字)在哪个位置插入一个数\n    for (int x : arr) {\n        cout << x << \" \";\n        \n    }\n    cout <<endl<< \"-------------------\" << endl;\n    arr.insert(arr.begin(), 3);\n    for (int x : arr) {\n        cout << x << \" \";\n    }\n\n    cout <<endl<< \"-------------------\" << endl;\n    arr.erase(arr.begin());//擦除数组地址中的数据\n    for (int x : arr) {\n        cout << x << \" \";\n    }\n    cout <<endl<< \"-------------------\" << endl;\n    arr.erase(arr.begin()+1, arr.end());//擦除区域的数据\n    for (int x : arr) {\n        cout << x << \" \";\n    }\n    cout <<endl<< \"-------------------\" << endl;\n\n    vector<int>s = { 1,1,1,2,2,2,1,3,1,4,5,5,6,7 };//去除相邻重复元素，不相邻不可去除\n    s.erase(unique(s.begin(), s.end()), s.end());//使用了algorithm\n    for (int x : s) {\n        cout << x << \" \";\n    }\n    cout <<endl<< \"-------------------\" << endl;\n\n    s = { 1,1,1,2,2,2,1,3,4,5,5,6,7 };\n    sort(s.begin(),s.end());//若想去重先用sort排序;\n    //使用了algorithm\n    auto it=unique(s.begin(), s.end());\n    s.erase(it,s.end());\n    for (int x : s) {\n        cout << x << \" \";\n    }\n    cout <<endl<< \"-------------------\" << endl;\n  \n}"
     }
   }
 };

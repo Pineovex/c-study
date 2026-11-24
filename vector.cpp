@@ -1,71 +1,36 @@
 #include <iostream>
-#include <string>
-#include <vector>
-#include <algorithm>
-
+#include <queue> //先进先出
+#include <stack> //先进后出
+// 栈与队列
 using namespace std;
 
 int main() {
-    vector<int>aa(100, 1);//定义一个长度为100 初始值为1的数组
-    vector<int>ab(100,1);//定义一个长度为100 初始值为1的数组
-    vector<vector<int>>ac(100,vector<int>());//定义一个行100 不定列的数组
-    vector<vector<vector<int>>>ad(100, vector<vector<int>>(100, vector<int>(10)));//三维数组
+    stack<int> st; // 原理类似于向瓶子里扔石子 先取最上端的数据
+    // st.size()元素个数
+    // st.empty()是否为空
+    st.push(3); // 压入一个元素进栈
+    st.push(2);
+    st.push(1);
+    cout << st.top() << " "; // 返回栈顶的数据
+    // st.pop() 弹出一个元素
+    st.pop(); // 1被弹出
+    cout << st.top() << endl;
 
-    vector<int>arr = { 1,12,12 };
-    arr.push_back(55);//向最后插入
-    for (int x : arr) {
-        cout << x<<" ";
-    }
-    cout <<endl<< "-------------------" << endl;
-    arr.pop_back();//删除最后的内容
-    for (int x : arr) {
-        cout << x << " ";
-    }
-    cout <<endl<< "-------------------" << endl;
-    arr.insert(arr.begin() + 1, 2);//insert(地址+偏移,插入的数字)在哪个位置插入一个数
-    for (int x : arr) {
-        cout << x << " ";
-        
-    }
-    cout <<endl<< "-------------------" << endl;
-    arr.insert(arr.begin(), 3);
-    for (int x : arr) {
-        cout << x << " ";
-    }
-
-    cout <<endl<< "-------------------" << endl;
-    arr.erase(arr.begin());//擦除数组地址中的数据
-    for (int x : arr) {
-        cout << x << " ";
-    }
-    cout <<endl<< "-------------------" << endl;
-    arr.erase(arr.begin()+1, arr.end());//擦除区域的数据
-    for (int x : arr) {
-        cout << x << " ";
-    }
-    cout <<endl<< "-------------------" << endl;
-
-    vector<int>s = { 1,1,1,2,2,2,1,3,1,4,5,5,6,7 };//去除相邻重复元素，不相邻不可去除
-    s.erase(unique(s.begin(), s.end()), s.end());//使用了algorithm
-    for (int x : s) {
-        cout << x << " ";
-    }
-    cout <<endl<< "-------------------" << endl;
-
-    s = { 1,1,1,2,2,2,1,3,4,5,5,6,7 };
-    sort(s.begin(),s.end());//若想去重先用sort排序;
-    //使用了algorithm
-    auto it=unique(s.begin(), s.end());
-    s.erase(it,s.end());
-    for (int x : s) {
-        cout << x << " ";
-    }
-    cout <<endl<< "-------------------" << endl;
- 
-    //resize
-    s.resize(5, 3);//前面为重设的初始长度 当设长的时候赋值为3
-    //当改短的时候 直接删除多余元素
-
-}//vector在堆中 不会爆栈
-//如果知道数组的长度 最好直接声明长度 可减少性能开销 防止时间超时
-//vector 用.size()返回的类型为size_t 有的平台为32位范围[0，2^32）小心溢出
+    queue<int> q; // 类似排队 先进先出
+    q.push(1);
+    q.push(2);
+    q.push(3);
+    cout << q.front() << " "; // 输出第一个数据
+    cout << q.back() << endl; // 输出最后的数据
+    q.pop();
+    cout << q.front() << " ";
+    priority_queue<int> pq; // 优先队列（堆） 先进先出 但是会根据优先级排序
+    // 提供常数时间的访问最大元素的能力，对数时间的插入和删除元素的能力，底层原理是二叉树
+    pq.push(2);
+    pq.push(1);
+    pq.push(3);                                         // 默认是大顶堆
+    priority_queue<int, vector<int>, greater<int>> pq2; // 小顶堆
+    cout << pq.top() << endl;  // 输出最大值
+    cout << pq.size() << endl;  // 输出元素个数
+    pq.pop();// 删除顶端元素
+}

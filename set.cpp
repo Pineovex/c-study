@@ -1,60 +1,65 @@
-#include <iostream>
-#include <string>
-#include <vector>
-#include <set>
-#include <unordered_set>
 #include <algorithm>
+#include <iostream>
+#include <set>
+#include <string>
+#include <unordered_set>
+#include <vector>
 
 using namespace std;
 
 int main() {
-	set<int>s;//¶¨ÒåÒ»¸ö¼¯ºÏs
-	s = { 1,4,1,1,2,4,5,6,1,5,7,8 };//×Ô¶¯´ÓĞ¡µ½´óÅÅĞò
-	s.insert(3);//O(log(n))
-	for (auto x : s) {
-		cout << x << " ";
-	}
-	cout << endl;
-	cout << "-----------------" << endl;
+    set<int> s;                               // å®šä¹‰ä¸€ä¸ªé›†åˆs
+    s = {1, 4, 1, 1, 2, 4, 5, 6, 1, 5, 7, 8}; // è‡ªåŠ¨ä»å°åˆ°å¤§æ’åº
+    s.insert(3);                              // O(log(n))
+    for (auto x : s) {
+        cout << x << " ";
+    }
+    cout << endl;
+    cout << "-----------------" << endl;
 
-	//´Ó´óµ½Ğ¡ÅÅĞòÓÃ set<int,greater<int>>s
-	//²»ÅÅĞò unordered_set ×¢ÒâÌí¼Ó<unordered_set>Í·ÎÄ¼ş
-	unordered_set<int>b = { 3,1,4,3,2,5 };
-	for (auto x : b) {
-		cout << x << " ";
-	}
-	cout << endl;
-	cout << "-----------------" << endl;
+    // ä»å¤§åˆ°å°æ’åºç”¨ set<int,greater<int>>s
+    // ä¸æ’åº unordered_set æ³¨æ„æ·»åŠ <unordered_set>å¤´æ–‡ä»¶
+    unordered_set<int> b = {3, 1, 4, 3, 2, 5};
+    for (auto x : b) {
+        cout << x << " ";
+    }
+    cout << endl;
+    cout << "-----------------" << endl;
+    // è®©å…ƒç´ å¯å¤šæ¬¡å‡ºç° å¹¶æ’åºç”¨multiset åœ¨<set>å¤´æ–‡ä»¶ä¸­
+    multiset<int> c = {1, 4, 1, 1, 2, 4, 5, 6, 1, 5};
+    for (auto x : c) {
+        cout << x << " ";
+    }
+    cout << endl;
+    cout << "-----------------" << endl;
 
+    vector<int> arr = {1, 1, 3, 4, 5, 7, 7, 1, 4};
+    set<int> a; // vectorä¸setç»“åˆå»é‡
+    for (int x : arr) {
+        a.insert(x);
+    }
+    for (auto x : a) {
+        cout << x << " ";
+    }
+    cout << endl;
+    cout << "-----------------" << endl;
+    cout << *s.find(5) << endl; // O(log(n))
+    // findè¿”å›é›†åˆä¸­æŸ¥æ‰¾å…ƒç´ çš„è¿­ä»£å™¨
+    // è‹¥æ²¡æœ‰å¯¹åº”çš„æŒ‡åˆ™è¿”å›s.end()çš„è¿­ä»£å™¨ ä¸è¦å»è®¿é—® ä»…éœ€åˆ¤æ–­å³å¯
+    cout << "-----------------" << endl;
+    // s.size()å®¹å™¨å˜é‡æ•°é‡ O(1)
+    // s.empty()åˆ¤æ–­å®¹å™¨æ˜¯å¦ä¸ºç©º æ˜¯ç©ºè¿”å›1 ä¸æ˜¯ç©ºï¼ˆæœ‰å…ƒç´ ï¼‰è¿”å›0 O(1)
+    // s.clear()æ¸…ç©ºå…ƒç´  O(n)
+    // s.count()å¯¹å…ƒç´ è®¡æ•° æœ‰ä¸º1 æ— ä¸º0 å› ä¸ºsetä¸ºé›†åˆå…ƒç´ ä¸å¯é‡ O(log(n));
 
-	vector<int>arr = { 1,1,3,4,5,7,7,1,4 };
-	set<int>a;//vectorÓëset½áºÏÈ¥ÖØ
-	for (int x : arr) {
-		a.insert(x);
-	}
-	for (auto x : a) {
-		cout << x << " ";
-	}
-	cout << endl;
-	cout << "-----------------" << endl;
-	cout << *s.find(5) << endl;//O(log(n))
-	//find·µ»Ø¼¯ºÏÖĞ²éÕÒÔªËØµÄµØÖ·
-	//ÈôÃ»ÓĞ¶ÔÓ¦µÄÖ¸Ôò·µ»Øs.end()µÄµØÖ· Îª¿ÕÃ»ÓĞÈÎºÎÖµ
-	cout << "-----------------" << endl;
-	//s.size()ÈİÆ÷±äÁ¿ÊıÁ¿ O(1)
-	//s.empty()ÅĞ¶ÏÈİÆ÷ÊÇ·ñÎª¿Õ ÊÇ¿Õ·µ»Ø1 ²»ÊÇ¿Õ£¨ÓĞÔªËØ£©·µ»Ø0 O(1)
-	//s.clear()Çå¿ÕÔªËØ O(n)
-	//s.count()¶ÔÔªËØ¼ÆÊı ÓĞÎª1 ÎŞÎª0 ÒòÎªsetÎª¼¯ºÏÔªËØ²»¿ÉÖØ O(log(n));
-	
-	//s = { 1,4,1,1,2,4,5,6,1,5,7,8 };
-	s.erase(5);//É¾³ıÖ¸¶¨µÄÊıÖµ O(1) ==s.erase(s.find(5))
-	
-	for (auto x : s) {
-		cout << x << " ";
-	}
-	cout << endl;
-	cout << "-----------------" << endl;
-	cout << *s.lower_bound(5)<<endl;//·µ»Ø>=5µÄµÚÒ»¸öÔªËØ O(log(n)+n)
-	cout << *s.upper_bound(5) << endl;//·µ»Ø>5µÄµÚÒ»¸öÔªËØ O(log(n)+n)
+    // s = { 1,4,1,1,2,4,5,6,1,5,7,8 };
+    s.erase(5); // åˆ é™¤æŒ‡å®šçš„æ•°å€¼ O(1) ==s.erase(s.find(5))
 
+    for (auto x : s) {
+        cout << x << " ";
+    }
+    cout << endl;
+    cout << "-----------------" << endl;
+    cout << *s.lower_bound(5) << endl; // è¿”å›>=5çš„ç¬¬ä¸€ä¸ªå…ƒç´  O(log(n)+n)
+    cout << *s.upper_bound(5) << endl; // è¿”å›>5çš„ç¬¬ä¸€ä¸ªå…ƒç´  O(log(n)+n)
 }

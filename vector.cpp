@@ -6,18 +6,21 @@
 using namespace std;
 
 int main() {
+    vector<int>aa(100, 1);//å®šä¹‰ä¸€ä¸ªé•¿åº¦ä¸º100 åˆå§‹å€¼ä¸º1çš„æ•°ç»„
+    vector<int>ab(100,1);//å®šä¹‰ä¸€ä¸ªé•¿åº¦ä¸º100 åˆå§‹å€¼ä¸º1çš„æ•°ç»„
+    vector<vector<int>>ac(100,vector<int>());//å®šä¹‰ä¸€ä¸ªè¡Œ100 ä¸å®šåˆ—çš„æ•°ç»„
     vector<int>arr = { 1,12,12 };
-    arr.push_back(55);//Ïò×îºó²åÈë
+    arr.push_back(55);//å‘æœ€åæ’å…¥
     for (int x : arr) {
         cout << x<<" ";
     }
     cout <<endl<< "-------------------" << endl;
-    arr.pop_back();//É¾³ı×îºóµÄÄÚÈİ
+    arr.pop_back();//åˆ é™¤æœ€åçš„å†…å®¹
     for (int x : arr) {
         cout << x << " ";
     }
     cout <<endl<< "-------------------" << endl;
-    arr.insert(arr.begin() + 1, 2);//insert(µØÖ·+Æ«ÒÆ,²åÈëµÄÊı×Ö)ÔÚÄÄ¸öÎ»ÖÃ²åÈëÒ»¸öÊı
+    arr.insert(arr.begin() + 1, 2);//insert(åœ°å€+åç§»,æ’å…¥çš„æ•°å­—)åœ¨å“ªä¸ªä½ç½®æ’å…¥ä¸€ä¸ªæ•°
     for (int x : arr) {
         cout << x << " ";
         
@@ -29,27 +32,27 @@ int main() {
     }
 
     cout <<endl<< "-------------------" << endl;
-    arr.erase(arr.begin());//²Á³ıÊı×éµØÖ·ÖĞµÄÊı¾İ
+    arr.erase(arr.begin());//æ“¦é™¤æ•°ç»„åœ°å€ä¸­çš„æ•°æ®
     for (int x : arr) {
         cout << x << " ";
     }
     cout <<endl<< "-------------------" << endl;
-    arr.erase(arr.begin()+1, arr.end());//²Á³ıÇøÓòµÄÊı¾İ
+    arr.erase(arr.begin()+1, arr.end());//æ“¦é™¤åŒºåŸŸçš„æ•°æ®
     for (int x : arr) {
         cout << x << " ";
     }
     cout <<endl<< "-------------------" << endl;
 
-    vector<int>s = { 1,1,1,2,2,2,1,3,1,4,5,5,6,7 };//È¥³ıÏàÁÚÖØ¸´ÔªËØ£¬²»ÏàÁÚ²»¿ÉÈ¥³ı
-    s.erase(unique(s.begin(), s.end()), s.end());//Ê¹ÓÃÁËalgorithm
+    vector<int>s = { 1,1,1,2,2,2,1,3,1,4,5,5,6,7 };//å»é™¤ç›¸é‚»é‡å¤å…ƒç´ ï¼Œä¸ç›¸é‚»ä¸å¯å»é™¤
+    s.erase(unique(s.begin(), s.end()), s.end());//ä½¿ç”¨äº†algorithm
     for (int x : s) {
         cout << x << " ";
     }
     cout <<endl<< "-------------------" << endl;
 
     s = { 1,1,1,2,2,2,1,3,4,5,5,6,7 };
-    sort(s.begin(),s.end());//ÈôÏëÈ¥ÖØÏÈÓÃsortÅÅĞò;
-    //Ê¹ÓÃÁËalgorithm
+    sort(s.begin(),s.end());//è‹¥æƒ³å»é‡å…ˆç”¨sortæ’åº;
+    //ä½¿ç”¨äº†algorithm
     auto it=unique(s.begin(), s.end());
     s.erase(it,s.end());
     for (int x : s) {

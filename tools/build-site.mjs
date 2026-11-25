@@ -13,57 +13,57 @@ const META = {
   'vector.cpp': {
     cat: 'STL 容器',
     title: 'vector 动态数组',
-    desc: 'push_back / pop_back / insert / erase，以及 unique 相邻去重的正确用法（先去重先排序）。',
+    desc: '增删查都在这。注意 unique 只去掉相邻的重复，忘了先 sort 会以为它坏了。',
   },
   'set.cpp': {
     cat: 'STL 容器',
     title: 'set 集合与去重',
-    desc: 'set 自动升序、unordered_set 用哈希不排序、vector 喂给 set 去重、find / count / erase / lower_bound 的复杂度。',
+    desc: '又想自动排序又想能查，就用 set；只要快、不在乎顺序，用 unordered_set。末尾顺手记了 vector 怎么去重。',
   },
   'map+pair.cpp': {
     cat: 'STL 容器',
     title: 'map 与 pair',
-    desc: '键值对映射、红黑树 O(log n) 与哈希表 unordered_map 的差别，pair 的 first / second 和按字典序比较。',
+    desc: 'key 自动排好序，查一次 O(log n)。pair 顺手写在一起，比较是字典序。',
   },
   'stack and queue.cpp': {
     cat: 'STL 容器',
     title: '栈与队列',
-    desc: 'stack 先进后出（top / push / pop），queue 先进先出（front / back / push / pop）。',
+    desc: '一个后进先出，一个先进先出。接口就那几个，别记混。',
   },
   'iterator.cpp': {
     cat: 'STL 容器',
     title: '迭代器',
-    desc: '像指针一样遍历容器：begin() 指向首元素、end() 指向最后一个元素的再下一个位置，取值要解引用。',
+    desc: 'begin() 是第一个元素，end() 是最后一个的后面，不是最后一个。这里容易写错。',
   },
   'algorithm.cpp': {
     cat: '算法库',
     title: 'algorithm 常用函数',
-    desc: 'sort 升序与 greater 降序、max / min / swap / reverse、next_permutation 全排列、lower_bound 与 upper_bound 二分。',
+    desc: 'sort 配 greater 就是降序。二分用 lower_bound，自己手写边界很容易错。',
   },
   '冒泡排序.cpp': {
     cat: '排序算法',
     title: '冒泡排序',
-    desc: '相邻两两比较、大的往后冒，O(n²)，最直观但最慢的一版手写排序。',
+    desc: '最好懂也最慢，O(n²)。先把这个写熟再谈别的。',
   },
   '插入排序.cpp': {
     cat: '排序算法',
     title: '插入排序',
-    desc: '把当前元素往前面已排好的序列里插，O(n²)，对近乎有序的数组很快。',
+    desc: '像摸牌，抓到一张就往前面插。数据本来接近有序时很快。',
   },
   '选择排序.cpp': {
     cat: '排序算法',
     title: '选择排序',
-    desc: '每一轮选出剩下部分的最小值换到前面，交换次数少，O(n²)。',
+    desc: '每轮挑出最小的换到前面。交换次数少，但复杂度还是 O(n²)。',
   },
   '字符串的拆除与拼接.cpp': {
     cat: '字符串与大数',
     title: '字符串的拆分与拼接',
-    desc: 'istringstream 按空格拆出 int / string / double，ostringstream 再拼回一个字符串。',
+    desc: 'istringstream 当 cin 用，把一行按空格拆开；ostringstream 反过来拼回一个字符串。',
   },
   '高精度算法.cpp': {
     cat: '字符串与大数',
     title: '高精度加法',
-    desc: '用数组倒序存每一位、逐位相加再处理进位，解决 long long 也装不下的整数运算。',
+    desc: 'long long 装不下就只能用数组存。倒着存、逐位加、进位单独处理。',
   },
 };
 

@@ -272,13 +272,14 @@
     html +=
       '<div class="hero">' +
       "<h1>C++ 竞赛笔记</h1>" +
-      "<p>这是一份写给自己的 C++ 竞赛入门笔记：只讲 STL 和常用算法怎么用，每篇都是能直接编译运行的完整代码，注释写在对应那一行旁边。</p>" +
-      "<p>看懂之后一定要去洛谷、力扣做题，光看不写还是不会。</p>" +
-      '<div class="meta-row">' +
-      '<span class="chip accent">' + ORDER.length + " 篇</span>" +
-      '<span class="chip">' + BY_CAT.length + " 个分类</span>" +
-      '<span class="chip">C++17</span>' +
-      "</div></div>";
+      "<p>写给自己看的，只记 STL 和常用算法怎么用。代码都能直接编译，注释就写在对应那行旁边。</p>" +
+      "<p>光看不写没用，去洛谷、力扣做题。</p>" +
+      '<p class="dim">目前 ' +
+      ORDER.length +
+      " 篇，" +
+      BY_CAT.length +
+      " 个分类。</p>" +
+      "</div>";
 
     BY_CAT.forEach(function (g) {
       html += '<div class="section-title">' + esc(g.cat) + "</div>";

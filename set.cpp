@@ -51,7 +51,7 @@ int main() {
     // s.empty()判断容器是否为空 是空返回1 不是空（有元素）返回0 O(1)
     // s.clear()清空元素 O(n)
     // s.count()对元素计数 有为1 无为0 因为set为集合元素不可重 O(log(n));
-
+    // s.count()如果是对multiset则返回这个元素的数量 O(log(n)+n)
     // s = { 1,4,1,1,2,4,5,6,1,5,7,8 };
     s.erase(5); // 删除指定的数值 O(1) ==s.erase(s.find(5))
 
@@ -60,6 +60,6 @@ int main() {
     }
     cout << endl;
     cout << "-----------------" << endl;
-    cout << *s.lower_bound(5) << endl; // 返回>=5的第一个元素 O(log(n)+n)
-    cout << *s.upper_bound(5) << endl; // 返回>5的第一个元素 O(log(n)+n)
+    cout << *s.lower_bound(6) << endl; // 返回>=6的第一个元素 O(log(n)+n)
+    cout << *s.upper_bound(6) << endl; // 返回>6的第一个元素 O(log(n)+n)
 }

@@ -3,12 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>C++ 竞赛笔记 · c-study</title>
-<meta name="description" content="C++ 竞赛用的 STL 与常用算法笔记，代码可以直接编译运行。">
+<title>C++ 绔炶禌绗旇 路 c-study</title>
+<meta name="description" content="C++ 绔炶禌鐢ㄧ殑 STL 涓庡父鐢ㄧ畻娉曠瑪璁帮紝浠ｇ爜鍙互鐩存帴缂栬瘧杩愯銆?>
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23ffffff'/%3E%3Cpath d='M13 11l-4 5 4 5M19 11l4 5-4 5' stroke='%230969da' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <script>
-// 在首屏绘制前定好主题，否则深色用户会先闪一下白底
 (function () {
   try {
     if (localStorage.getItem('cstudy-theme') === 'dark') {
@@ -20,37 +19,37 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<a class="skip" href="#doc">跳到正文</a>
+<a class="skip" href="#doc">璺冲埌姝ｆ枃</a>
 
 <header class="topbar">
-  <button id="menuBtn" class="menu-btn" type="button" aria-label="打开目录" aria-expanded="false">☰</button>
+  <button id="menuBtn" class="menu-btn" type="button" aria-label="鎵撳紑鐩綍" aria-expanded="false">鈽?/button>
 
   <a class="brand" href="#/">
     <span class="brand-mark">&lt;/&gt;</span>
     <span class="brand-text">
-      <strong>C++ 竞赛笔记</strong>
+      <strong>C++ 绔炶禌绗旇</strong>
       <small>c-study</small>
     </span>
   </a>
 
   <div class="top-actions">
-    <button id="themeBtn" class="theme-btn" type="button" aria-label="切换深浅色" title="切换深浅色">
+    <button id="themeBtn" class="theme-btn" type="button" aria-label="鍒囨崲娣辨祬鑹? title="鍒囨崲娣辨祬鑹?>
       <svg class="ic-moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
       <svg class="ic-sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
     </button>
-    <a class="link-btn" href="https://github.com/Pineovex/c-study" target="_blank" rel="noopener">仓库 ↗</a>
+    <a class="link-btn" href="https://github.com/Pineovex/c-study" target="_blank" rel="noopener">浠撳簱 鈫?/a>
   </div>
 </header>
 
 <div class="layout">
   <aside id="sidebar" class="sidebar">
     <div class="search-wrap">
-      <input id="search" type="search" placeholder="搜索笔记…" autocomplete="off" aria-label="搜索笔记">
+      <input id="search" type="search" placeholder="鎼滅储绗旇鈥? autocomplete="off" aria-label="鎼滅储绗旇">
     </div>
-    <nav id="nav" class="nav" aria-label="笔记目录"></nav>
+    <nav id="nav" class="nav" aria-label="绗旇鐩綍"></nav>
     <div class="side-foot">
       <span id="genInfo"></span>
-      <a href="https://github.com/Pineovex/c-study" target="_blank" rel="noopener">查看源码</a>
+      <a href="https://github.com/Pineovex/c-study" target="_blank" rel="noopener">鏌ョ湅婧愮爜</a>
     </div>
   </aside>
 
@@ -60,8 +59,8 @@
     <article id="doc" class="doc" tabindex="-1"></article>
 
     <footer class="foot">
-      <p>内容来自 <a href="https://github.com/Pineovex/c-study" target="_blank" rel="noopener">Pineovex/c-study</a>。</p>
-      <p class="dim">看懂了就去 <a href="https://www.luogu.com.cn/" target="_blank" rel="noopener">洛谷</a> / <a href="https://leetcode.cn/" target="_blank" rel="noopener">力扣</a> 刷题，不然还是不会。</p>
+      <p>鍐呭鏉ヨ嚜 <a href="https://github.com/Pineovex/c-study" target="_blank" rel="noopener">Pineovex/c-study</a>銆?/p>
+      <p class="dim">鐪嬫噦浜嗗氨鍘?<a href="https://www.luogu.com.cn/" target="_blank" rel="noopener">娲涜胺</a> / <a href="https://leetcode.cn/" target="_blank" rel="noopener">鍔涙墸</a> 鍒烽锛屼笉鐒惰繕鏄笉浼氥€?/p>
     </footer>
   </main>
 </div>
@@ -73,34 +72,34 @@
 <div id="musicDock" class="music-dock" hidden>
   <div id="musicPanel" class="music-panel" hidden>
     <div class="music-head">
-      <span class="music-kicker">休息一下</span>
-      <button id="musicClose" class="music-x" type="button" aria-label="收起">×</button>
+      <span class="music-kicker">浼戞伅涓€涓?/span>
+      <button id="musicClose" class="music-x" type="button" aria-label="鏀惰捣">脳</button>
     </div>
-    <div id="musicTitle" class="music-title">—</div>
-    <div id="musicBar" class="music-bar" role="slider" tabindex="0" aria-label="播放进度">
+    <div id="musicTitle" class="music-title">鈥?/div>
+    <div id="musicBar" class="music-bar" role="slider" tabindex="0" aria-label="鎾斁杩涘害">
       <div id="musicProg" class="music-prog"></div>
     </div>
     <div class="music-times"><span id="musicCur">0:00</span><span id="musicDur">0:00</span></div>
     <div class="music-row">
-      <button id="musicPrev" class="music-ctl" type="button" aria-label="上一首">
+      <button id="musicPrev" class="music-ctl" type="button" aria-label="涓婁竴棣?>
         <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M6 5h2v14H6zM20 5v14l-11-7z"/></svg>
       </button>
-      <button id="musicPlay" class="music-ctl music-ctl-main" type="button" aria-label="播放">
+      <button id="musicPlay" class="music-ctl music-ctl-main" type="button" aria-label="鎾斁">
         <svg class="ic-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
         <svg class="ic-pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>
       </button>
-      <button id="musicNext" class="music-ctl" type="button" aria-label="下一首">
+      <button id="musicNext" class="music-ctl" type="button" aria-label="涓嬩竴棣?>
         <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg>
       </button>
       <span class="music-vol">
         <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M4 10v4h3l4 3V7L7 10z"/><path d="M15.5 9a4 4 0 0 1 0 6"/></svg>
-        <input id="musicVol" type="range" min="0" max="1" step="0.01" value="0.6" aria-label="音量">
+        <input id="musicVol" type="range" min="0" max="1" step="0.01" value="0.6" aria-label="闊抽噺">
       </span>
     </div>
     <ul id="musicList" class="music-list"></ul>
   </div>
 
-  <button id="musicBtn" class="music-btn" type="button" aria-label="音乐" aria-expanded="false" title="休息一下，听点东西">
+  <button id="musicBtn" class="music-btn" type="button" aria-label="闊充箰" aria-expanded="false" title="浼戞伅涓€涓嬶紝鍚偣涓滆タ">
     <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l10-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/></svg>
   </button>
 </div>
@@ -108,7 +107,6 @@
 <script src="data.js"></script>
 <script src="app.js"></script>
 <script>
-// 深浅色切换：默认浅色，选择记在 localStorage
 (function () {
   var root = document.documentElement;
   var btn = document.getElementById('themeBtn');

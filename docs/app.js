@@ -1,10 +1,7 @@
-/* c-study 笔记站：纯静态，无外部依赖 */
 (function () {
   "use strict";
 
   var D = window.DATA || { items: {}, groups: [], repo: "#" };
-
-  /* ---------------- 语法高亮（C++ 轻量版） ---------------- */
 
   var KEYWORDS = new Set(
     ("alignas alignof and and_eq asm auto bitand bitor bool break case catch char char8_t char16_t " +
@@ -32,7 +29,6 @@
     return (c >= "a" && c <= "z") || (c >= "A" && c <= "Z") || (c >= "0" && c <= "9") || c === "_";
   }
 
-  // 返回 [{t:'text'|'span', cls, s}]
   function highlightLine(line, state) {
     var toks = [];
     var i = 0;
@@ -53,7 +49,6 @@
       var c = line[i];
       var rest = line.slice(i);
 
-      // 块注释延续
       if (state.block) {
         var endIdx = line.indexOf("*/", i);
         if (endIdx < 0) {
@@ -68,7 +63,6 @@
         continue;
       }
 
-      // 注释
       if (rest.startsWith("//")) {
         push("cm", rest);
         i = n;
@@ -79,7 +73,6 @@
         continue;
       }
 
-      // 预处理指令：# 出现在行首（前面只有空白）
       if (c === "#" && onlySpaceSoFar) {
         var m = rest.match(/^#[ \t]*[A-Za-z_]*/);
         push("pp", m[0]);
@@ -89,7 +82,6 @@
         continue;
       }
 
-      // 头文件名 <...>
       if (c === "<" && inPP) {
         var gt = line.indexOf(">", i);
         if (gt > 0) {
@@ -99,7 +91,6 @@
         }
       }
 
-      // 字符串 / 字符
       if (QUOTES[c]) {
         var q = QUOTES[c];
         var j = i + 1;
@@ -122,7 +113,6 @@
         continue;
       }
 
-      // 数字
       if (c >= "0" && c <= "9") {
         var k = i;
         while (k < n && /[0-9a-fA-FxX.]/.test(line[k])) k++;
@@ -132,7 +122,6 @@
         continue;
       }
 
-      // 标识符
       if (/[A-Za-z_]/.test(c)) {
         var w = i;
         while (w < n && isWord(line[w])) w++;
@@ -177,8 +166,6 @@
     return out.join("");
   }
 
-  /* ---------------- 数据整理 ---------------- */
-
   var ORDER = [];
   var BY_CAT = [];
   D.groups.forEach(function (g) {
@@ -192,8 +179,6 @@
     BY_CAT.push({ cat: g.cat, items: list });
   });
 
-  /* ---------------- DOM ---------------- */
-
   var navEl = document.getElementById("nav");
   var docEl = document.getElementById("doc");
   var searchEl = document.getElementById("search");
@@ -204,8 +189,6 @@
   var genEl = document.getElementById("genInfo");
 
   if (genEl) genEl.textContent = "共 " + ORDER.length + " 篇 · 更新于 " + (D.generatedAt || "");
-
-  /* ---------------- 渲染：侧栏 ---------------- */
 
   function renderNav(filter) {
     var kw = (filter || "").trim().toLowerCase();
@@ -254,8 +237,6 @@
       links[i].classList.toggle("active", on);
     }
   }
-
-  /* ---------------- 渲染：正文 ---------------- */
 
   function currentFile() {
     var m = location.hash.match(/^#\/n\/(.+)$/);
@@ -421,8 +402,6 @@
     }, 1800);
   }
 
-  /* ---------------- 路由 ---------------- */
-
   function route() {
     var file = currentFile();
     if (!file) {
@@ -436,8 +415,6 @@
     window.scrollTo({ top: 0, behavior: "auto" });
     closeSidebar();
   }
-
-  /* ---------------- 移动端侧栏 ---------------- */
 
   function openSidebar() {
     sidebarEl.classList.add("open");
@@ -460,13 +437,10 @@
     if (a) closeSidebar();
   });
 
-  /* ---------------- 搜索 ---------------- */
-
   searchEl.addEventListener("input", function () {
     renderNav(searchEl.value);
   });
 
-  // 支持按 / 聚焦搜索
   document.addEventListener("keydown", function (e) {
     if (e.key === "/" && document.activeElement !== searchEl) {
       e.preventDefault();
@@ -478,8 +452,6 @@
       searchEl.blur();
     }
   });
-
-  /* ---------------- 音乐播放器 ---------------- */
 
   var music = D.music || [];
   var audioEl = document.getElementById("musicAudio");
@@ -525,7 +497,6 @@
     if (p && p.catch) p.catch(function () {});
   }
 
-  // 列表为空就整个不出现，页面上不留任何说明文字
   if (dockEl && audioEl && panelEl && musicBtn && music.length) {
     dockEl.hidden = false;
 
@@ -600,7 +571,7 @@
       if (musicCur) musicCur.textContent = fmtTime(audioEl.currentTime);
     });
     audioEl.addEventListener("ended", function () {
-      // 放完顺延下一首；最后一首就停下
+
       if (trackIndex >= 0 && trackIndex + 1 < music.length) playTrack(trackIndex + 1);
       else if (musicProg) musicProg.style.width = "0%";
     });
@@ -631,8 +602,6 @@
       }
     });
   }
-
-  /* ---------------- 启动 ---------------- */
 
   window.addEventListener("hashchange", route);
 

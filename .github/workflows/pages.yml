@@ -1,7 +1,5 @@
 name: Build and deploy site
 
-# 只要 main 分支上有 .cpp / 站点文件变化，就自动重建 docs/data.js 并部署到 GitHub Pages。
-# 你也可以在 Actions 页面手动点 “Run workflow” 触发一次。
 on:
   push:
     branches: [main]
@@ -12,7 +10,6 @@ permissions:
   pages: write
   id-token: write
 
-# 同一时间只跑一个部署，避免并发推送互相覆盖
 concurrency:
   group: pages
   cancel-in-progress: false

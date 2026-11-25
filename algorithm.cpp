@@ -70,6 +70,7 @@ int main() {
     cout << cos(0) << endl;       // 余弦
     cout << sin(0) << endl;       // 正弦
     cout << exp(3) << endl;       // e的指数
-    //floor()向下取整 ceil()向上取整 round()四舍五入
-    //由于浮点数的精度有些数字会有较小的误差
+    // floor()向下取整 ceil()向上取整 round()四舍五入
+    // 由于浮点数的精度有些数字会有较小的误差
+    //如果用的万能头文件可以用 gcd()最小公因数 与lcm()最小公倍数 函数
 }

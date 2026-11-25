@@ -29,8 +29,9 @@
   --toast-fg: #ffffff;
   --shadow: rgba(31, 35, 40, 0.12);
 
-  /* Consolas 优先：字形清楚，没有连字。中文注释回落到雅黑 */
-  --mono: Consolas, "SF Mono", "DejaVu Sans Mono", "Microsoft YaHei", monospace;
+  /* 等宽字体跟 Visual Studio 编辑器保持一致：Cascadia Code。
+     中文注释回落到微软雅黑，和 VS 编辑器里一样。连字在 pre 里单独关掉。 */
+  --mono: "Cascadia Code", "Cascadia Mono", Consolas, "Microsoft YaHei", monospace;
   --sans: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Microsoft YaHei",
     "Segoe UI", sans-serif;
 
@@ -371,7 +372,8 @@ pre {
   padding: 14px 0 16px;
   font-family: var(--mono);
   font-size: 14px;
-  line-height: 1.75;
+  line-height: 1.6;
+  font-weight: 400;
   tab-size: 4;
   /* 关掉连字，-> != >= 这类符号要能一眼分清 */
   font-variant-ligatures: none;

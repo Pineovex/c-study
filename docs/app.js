@@ -525,28 +525,21 @@
     if (p && p.catch) p.catch(function () {});
   }
 
-  if (dockEl && audioEl && panelEl && musicBtn) {
-    // 有歌就显示；没歌也显示，让人知道该往哪放文件
+  // 列表为空就整个不出现，页面上不留任何说明文字
+  if (dockEl && audioEl && panelEl && musicBtn && music.length) {
     dockEl.hidden = false;
 
     if (musicListEl) {
-      if (!music.length) {
-        var emptyLi = document.createElement("li");
-        emptyLi.className = "music-empty";
-        emptyLi.textContent = "还没有音乐。把 mp3 / m4a 放进仓库的 docs/music/ 目录，提交后这里就有了。";
-        musicListEl.appendChild(emptyLi);
-      } else {
-        music.forEach(function (t, i) {
-          var li = document.createElement("li");
-          var b = document.createElement("button");
-          b.type = "button";
-          b.textContent = t.title;
-          b.title = t.file;
-          b.addEventListener("click", function () { playTrack(i); });
-          li.appendChild(b);
-          musicListEl.appendChild(li);
-        });
-      }
+      music.forEach(function (t, i) {
+        var li = document.createElement("li");
+        var b = document.createElement("button");
+        b.type = "button";
+        b.textContent = t.title;
+        b.title = t.file;
+        b.addEventListener("click", function () { playTrack(i); });
+        li.appendChild(b);
+        musicListEl.appendChild(li);
+      });
     }
 
     musicBtn.addEventListener("click", function () {

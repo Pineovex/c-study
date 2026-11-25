@@ -1,29 +1,29 @@
 #include <iostream>
-#include <map>//Ó³Éä ¼üÖµ¶Ô Ô­Àí¶ş²æÊ÷
-#include <unordered_map> //ÎŞĞòµÄmap ²éÕÒĞ§ÂÊ±Èmap¸ß Ô­Àí¹şÏ£±í
+#include <map> //æ˜ å°„ é”®å€¼å¯¹ åŸç†äºŒå‰æ ‘
 #include <string>
-#include <utility>//ÒıÈëpair¿ÉÓÃ<vector><map><set>´úÌæ
-
+#include <unordered_map> //æ— åºçš„map æŸ¥æ‰¾æ•ˆç‡æ¯”mapé«˜ åŸç†å“ˆå¸Œè¡¨
+#include <utility>       //å¼•å…¥pairå¯ç”¨<vector><map><set>ä»£æ›¿
 
 using namespace std;
 
 int main() {
-	map<string, string> Username;//O(log(n))
-	Username["ÓÃ»§Ãû"] = "ligang";//O(log(n))
-	cout << Username["ÓÃ»§Ãû"]<<endl;
-	
-	Username.insert(make_pair("ÃÜÂë","123123"));//O(log(n))
-	cout << Username["ÃÜÂë"]<<endl;
-	//size() O(1) empyy() O(1) clear() O(1)
-	//find(key) O(log(n))  count(key) O(1)
-	
-	pair<string, int>p1("ligang",2);
-	cout << p1.first <<" "<<p1.second << endl;
-	p1.first = "egg";
-	cout << p1.first << endl;
-	//pair Á½¸öpairÖ®¼ä¿ÉÒÔ±È½ÏÒ²¿ÉÅĞ¶ÏÊÇ·ñÏàµÈ °´ÕÕ×ÖµäË³Ğò
-	pair<string, int>p2("2", 3);
-	pair<string, int>p3("2", 4);
-	cout << (p2 > p3) << " " << (p1 > p3) << endl;
+    map<string, string> Username;  // O(log(n))
+    Username["ç”¨æˆ·å"] = "ligang"; // O(log(n))
+    cout << Username["ç”¨æˆ·å"] << endl;
 
+    Username.insert(make_pair("å¯†ç ", "123123")); // O(log(n))
+    cout << Username["å¯†ç "] << endl;
+    // size() O(1) empyy() O(1) clear() O(1)
+    // find(key) O(log(n))  count(key) O(1)
+
+    // multimapä¸unordered_mapä¸å¸¸ç”¨ å¯è‡ªè¡Œå­¦ä¹ 
+
+    pair<string, int> p1("ligang", 2);
+    cout << p1.first << " " << p1.second << endl;
+    p1.first = "egg";
+    cout << p1.first << endl;
+    // pair ä¸¤ä¸ªpairä¹‹é—´å¯ä»¥æ¯”è¾ƒä¹Ÿå¯åˆ¤æ–­æ˜¯å¦ç›¸ç­‰ æŒ‰ç…§å­—å…¸é¡ºåº
+    pair<string, int> p2("2", 3);
+    pair<string, int> p3("2", 4);
+    cout << (p2 > p3) << " " << (p1 > p3) << endl;
 }

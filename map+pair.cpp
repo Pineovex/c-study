@@ -21,6 +21,8 @@ int main() {
     for (auto x : m) {
         cout << x.first << ":" << x.second << endl; // O(log(n))
     } // map是有序的，按照key从小到大排序 key(前面的)为唯一值，value(后面的)可以重复
+    //map会赋值给不存在的key为0，unordered_map不会赋值给不存在的key
+    //map会自动排序，unordered_map不会排序，unordered_map查找效率比map高
     // multimap与unordered_map不常用 可自行学习
 
     pair<string, int> p1("ligang", 2);

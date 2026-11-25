@@ -104,11 +104,25 @@ const grouped = CAT_ORDER.map((cat) => ({
   items: items.filter((i) => i.cat === cat).map((i) => i.file),
 })).filter((g) => g.items.length > 0);
 
+// 扫描 docs/music/ 下的音频文件（用户自己上传；放到那个目录里就会被收录）
+const MUSIC_DIR = path.join(repoRoot, 'docs', 'music');
+const AUDIO_EXTS = ['.mp3', '.m4a', '.ogg', '.wav', '.flac', '.aac'];
+let music = [];
+try {
+  music = fs
+    .readdirSync(MUSIC_DIR)
+    .filter((f) => AUDIO_EXTS.includes(path.extname(f).toLowerCase()))
+    .sort((a, b) => a.localeCompare(b, 'zh'));
+} catch (e) {
+  // 目录不存在或读取失败 → 没有 music
+}
+
 const payload = {
   repo: 'https://github.com/Pineovex/c-study',
   generatedAt: new Date().toISOString().slice(0, 10),
   groups: grouped,
   items: Object.fromEntries(items.map((i) => [i.file, i])),
+  music: music.map((file) => ({ file, title: file.replace(/\.[^.]+$/, '').replace(/[_]+/g, ' ') })),
 };
 
 fs.mkdirSync(path.dirname(outFile), { recursive: true });
@@ -116,6 +130,7 @@ fs.writeFileSync(outFile, 'window.DATA = ' + JSON.stringify(payload, null, 2) + 
 
 console.log(`已生成 ${path.relative(repoRoot, outFile)}：${items.length} 个文件，${grouped.length} 个分类`);
 for (const i of items) console.log(`  [${i.cat}] ${i.file}  (${i.lines} 行)`);
+console.log(music.length ? `  音乐 ${music.length} 首：${music.join('、')}` : '  音乐目录为空（docs/music/）');
 
 function options_check(list) {
   if (list.length === 0) throw new Error('仓库根目录没找到任何 .cpp 文件');

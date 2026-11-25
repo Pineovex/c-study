@@ -449,21 +449,21 @@ pre::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-  gap: 1px;
+  gap: 10px;
   margin: 24px 0 0;
-  background: var(--line-soft);
-  border: 1px solid var(--line-soft);
 }
 
 .card {
   display: block;
   padding: 16px 18px;
   background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 4px;
   color: var(--fg-dim);
   text-decoration: none;
-  transition: background 0.15s;
+  transition: background 0.15s, border-color 0.15s;
 }
-.card:hover { background: var(--panel); text-decoration: none; }
+.card:hover { background: var(--panel); border-color: var(--fg-mute); text-decoration: none; }
 .card .card-cat { font-size: 11px; color: var(--accent); }
 .card .card-title { display: block; color: var(--fg); font-size: 15px; font-weight: 600; margin: 5px 0 3px; }
 .card .card-file { font-family: var(--mono); font-size: 11px; color: var(--fg-mute); }

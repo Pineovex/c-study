@@ -479,6 +479,166 @@
     }
   });
 
+  /* ---------------- 音乐播放器 ---------------- */
+
+  var music = D.music || [];
+  var audioEl = document.getElementById("musicAudio");
+  var dockEl = document.getElementById("musicDock");
+  var musicBtn = document.getElementById("musicBtn");
+  var panelEl = document.getElementById("musicPanel");
+  var musicClose = document.getElementById("musicClose");
+  var musicTitle = document.getElementById("musicTitle");
+  var musicBar = document.getElementById("musicBar");
+  var musicProg = document.getElementById("musicProg");
+  var musicCur = document.getElementById("musicCur");
+  var musicDur = document.getElementById("musicDur");
+  var musicPrev = document.getElementById("musicPrev");
+  var musicPlay = document.getElementById("musicPlay");
+  var musicNext = document.getElementById("musicNext");
+  var musicVol = document.getElementById("musicVol");
+  var musicListEl = document.getElementById("musicList");
+  var trackIndex = -1;
+
+  function fmtTime(sec) {
+    if (!isFinite(sec) || sec < 0) return "0:00";
+    var m = Math.floor(sec / 60);
+    var s = Math.floor(sec % 60);
+    return m + ":" + (s < 10 ? "0" : "") + s;
+  }
+
+  function markTrack() {
+    if (!musicListEl) return;
+    var btns = musicListEl.querySelectorAll("button");
+    for (var i = 0; i < btns.length; i++) {
+      if (i === trackIndex) btns[i].classList.add("on");
+      else btns[i].classList.remove("on");
+    }
+  }
+
+  function playTrack(i) {
+    if (i < 0 || i >= music.length || !audioEl) return;
+    trackIndex = i;
+    audioEl.src = "music/" + encodeURIComponent(music[i].file);
+    if (musicTitle) musicTitle.textContent = music[i].title;
+    markTrack();
+    var p = audioEl.play();
+    if (p && p.catch) p.catch(function () {});
+  }
+
+  if (dockEl && audioEl && panelEl && musicBtn) {
+    // 有歌就显示；没歌也显示，让人知道该往哪放文件
+    dockEl.hidden = false;
+
+    if (musicListEl) {
+      if (!music.length) {
+        var emptyLi = document.createElement("li");
+        emptyLi.className = "music-empty";
+        emptyLi.textContent = "还没有音乐。把 mp3 / m4a 放进仓库的 docs/music/ 目录，提交后这里就有了。";
+        musicListEl.appendChild(emptyLi);
+      } else {
+        music.forEach(function (t, i) {
+          var li = document.createElement("li");
+          var b = document.createElement("button");
+          b.type = "button";
+          b.textContent = t.title;
+          b.title = t.file;
+          b.addEventListener("click", function () { playTrack(i); });
+          li.appendChild(b);
+          musicListEl.appendChild(li);
+        });
+      }
+    }
+
+    musicBtn.addEventListener("click", function () {
+      var opening = panelEl.hidden;
+      panelEl.hidden = !opening;
+      musicBtn.setAttribute("aria-expanded", opening ? "true" : "false");
+    });
+
+    if (musicClose) {
+      musicClose.addEventListener("click", function () {
+        panelEl.hidden = true;
+        musicBtn.setAttribute("aria-expanded", "false");
+      });
+    }
+
+    musicPlay.addEventListener("click", function () {
+      if (trackIndex < 0) {
+        if (music.length) playTrack(0);
+        return;
+      }
+      if (audioEl.paused) {
+        var p = audioEl.play();
+        if (p && p.catch) p.catch(function () {});
+      } else {
+        audioEl.pause();
+      }
+    });
+
+    musicPrev.addEventListener("click", function () {
+      if (trackIndex < 0) return;
+      if (audioEl.currentTime > 3) { audioEl.currentTime = 0; return; }
+      playTrack((trackIndex - 1 + music.length) % music.length);
+    });
+
+    musicNext.addEventListener("click", function () {
+      if (!music.length) return;
+      playTrack(trackIndex < 0 ? 0 : (trackIndex + 1) % music.length);
+    });
+
+    audioEl.addEventListener("play", function () {
+      panelEl.classList.add("playing");
+      dockEl.classList.add("playing");
+      musicPlay.setAttribute("aria-label", "暂停");
+    });
+    audioEl.addEventListener("pause", function () {
+      panelEl.classList.remove("playing");
+      dockEl.classList.remove("playing");
+      musicPlay.setAttribute("aria-label", "播放");
+    });
+    audioEl.addEventListener("loadedmetadata", function () {
+      if (musicDur) musicDur.textContent = fmtTime(audioEl.duration);
+    });
+    audioEl.addEventListener("timeupdate", function () {
+      var d = audioEl.duration;
+      if (musicProg) {
+        musicProg.style.width = d && isFinite(d) ? (audioEl.currentTime / d) * 100 + "%" : "0%";
+      }
+      if (musicCur) musicCur.textContent = fmtTime(audioEl.currentTime);
+    });
+    audioEl.addEventListener("ended", function () {
+      // 放完顺延下一首；最后一首就停下
+      if (trackIndex >= 0 && trackIndex + 1 < music.length) playTrack(trackIndex + 1);
+      else if (musicProg) musicProg.style.width = "0%";
+    });
+
+    function seekTo(e) {
+      if (!audioEl.duration || !isFinite(audioEl.duration)) return;
+      var r = musicBar.getBoundingClientRect();
+      var x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
+      var p = Math.min(1, Math.max(0, x / r.width));
+      audioEl.currentTime = p * audioEl.duration;
+    }
+    musicBar.addEventListener("click", seekTo);
+
+    if (musicVol) {
+      var savedVol = parseFloat(localStorage.getItem("cstudy-vol"));
+      if (isFinite(savedVol)) musicVol.value = String(savedVol);
+      audioEl.volume = parseFloat(musicVol.value);
+      musicVol.addEventListener("input", function () {
+        audioEl.volume = parseFloat(musicVol.value);
+        try { localStorage.setItem("cstudy-vol", musicVol.value); } catch (e) {}
+      });
+    }
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !panelEl.hidden) {
+        panelEl.hidden = true;
+        musicBtn.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+
   /* ---------------- 启动 ---------------- */
 
   window.addEventListener("hashchange", route);

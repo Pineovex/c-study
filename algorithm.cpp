@@ -1,62 +1,75 @@
+#include <algorithm> //ç®—æ³•åº“
+#include <cmath>
 #include <iostream>
-#include <algorithm>//Ëã·¨¿â
 #include <vector>
 using namespace std;
 
 int main() {
-	int arr[] = { 5,4,2,1,3 };
-	sort(arr, arr + 5);//¸øÊı×é´ÓĞ¡µ½´óÅÅĞò £¨ÆğÊ¼µØÖ·£¬½áÊøµØÖ·£©
-	for (auto x : arr) {
-		cout << x << " ";
-	}
-	cout << endl;
-	cout << "-------------------" << endl;
-	sort(arr, arr + 5,greater<int>());//¸øÊı×é´Ó´óµ½Ğ¡ÅÅĞò
-	for (auto x : arr) {
-		cout << x << " ";
-	}
-	cout << endl;
-	cout << "-------------------" << endl;
-	//½¨ÒéÊ¹ÓÃÈİÆ÷stl ËÙ¶È¸ü¿ì vectorÑİÊ¾
-	vector<int>li = { 1,3,4,2,6,5 };
-	sort(li.begin(), li.end());
-	for (auto x : li) {
-		cout << x << " ";
-	}
-	cout << endl;
-	cout << "-------------------" << endl;
+    int arr[] = {5, 4, 2, 1, 3};
+    sort(arr, arr + 5); // ç»™æ•°ç»„ä»å°åˆ°å¤§æ’åº ï¼ˆèµ·å§‹åœ°å€ï¼Œç»“æŸåœ°å€ï¼‰
+    for (auto x : arr) {
+        cout << x << " ";
+    }
+    cout << endl;
+    cout << "-------------------" << endl;
+    sort(arr, arr + 5, greater<int>()); // ç»™æ•°ç»„ä»å¤§åˆ°å°æ’åº
+    for (auto x : arr) {
+        cout << x << " ";
+    }
+    cout << endl;
+    cout << "-------------------" << endl;
+    // å»ºè®®ä½¿ç”¨å®¹å™¨stl é€Ÿåº¦æ›´å¿« vectoræ¼”ç¤º
+    vector<int> li = {1, 3, 4, 2, 6, 5};
+    sort(li.begin(), li.end());
+    for (auto x : li) {
+        cout << x << " ";
+    }
+    cout << endl;
+    cout << "-------------------" << endl;
 
-	cout << max(15, 10) << " ";
-	cout << min(15, 10) << endl;
-	cout << "-------------------" << endl;
+    cout << max(15, 10) << " ";  // æœ€å¤§å€¼
+    cout << min(15, 10) << endl; // æœ€å°å€¼
+    cout << "-------------------" << endl;
 
-	int a = 10, b = 15;
-	swap(a, b);//±äÁ¿½»»»
-	cout << a << " " << b << endl;
-	cout << "-------------------" << endl;
+    int a = 10, b = 15;
+    swap(a, b); // å˜é‡äº¤æ¢
+    cout << a << " " << b << endl;
+    cout << "-------------------" << endl;
 
-	vector<int>s1 = { 1,3,4,7,8 };
-	reverse(s1.begin(), s1.end());//·´×ª
-	for (auto x : s1) {
-		cout << x << " ";
-	}
-	cout << endl;
-	cout << "-------------------" << endl;
+    vector<int> s1 = {1, 3, 4, 7, 8};
+    reverse(s1.begin(), s1.end()); // åè½¬
+    for (auto x : s1) {
+        cout << x << " ";
+    }
+    cout << endl;
+    cout << "-------------------" << endl;
 
-	//È«ÅÅÁĞ next_permutation
-	vector<char>c = { 'a','a','b','a','b','b', };//Ö»ÓĞ19ÖÖÇé¿ö ÉÙÒ»ÖÖ ×îºÃÓÃsortÌáÇ°ÅÅºÃĞò
-	sort(c.begin(), c.end());
-	do {
-		for (auto x : c) {
-			cout << x <<" ";
-		}
-		cout << endl;
-	} while (next_permutation(c.begin(), c.end()));
-	cout << "-------------------" << endl;
-	vector<int>s2 = { 1,2,3,4,5 };
-	cout << *lower_bound(s2.begin(), s2.end(), 3) << endl;
-	cout << *upper_bound(s2.begin(), s2.end(), 3) << endl;
-	//Ò»¶¨ÒªÊÇÉıĞòÅÅÁĞ²Å¿ÉÊ¹ÓÃlower_boundÓëupper_bound ÇÒ·µ»ØµÄÎªµü´úÆ÷
+    // å…¨æ’åˆ— next_permutation
+    vector<char> c = {
+        'a', 'a', 'b', 'a', 'b', 'b',
+    }; // åªæœ‰19ç§æƒ…å†µ å°‘ä¸€ç§ æœ€å¥½ç”¨sortæå‰æ’å¥½åº
+    sort(c.begin(), c.end());
+    do {
+        for (auto x : c) {
+            cout << x << " ";
+        }
+        cout << endl;
+    } while (next_permutation(c.begin(), c.end()));
+    cout << "-------------------" << endl;
+    vector<int> s2 = {1, 2, 3, 4, 5};
+    cout << *lower_bound(s2.begin(), s2.end(), 3) << endl;
+    cout << *upper_bound(s2.begin(), s2.end(), 3) << endl;
+    // ä¸€å®šè¦æ˜¯å‡åºæ’åˆ—æ‰å¯ä½¿ç”¨lower_boundä¸upper_bound ä¸”è¿”å›çš„ä¸ºè¿­ä»£å™¨
 
-
+    // å¸¸è§çš„æ•°å­¦å‡½æ•°
+    cout << abs(-5) << endl;      // ç»å¯¹å€¼
+    cout << pow(2, 3) << endl;    // å¹‚è¿ç®—
+    cout << sqrt(16) << endl;     // å¹³æ–¹æ ¹
+    cout << log(2.71828) << endl; // è‡ªç„¶å¯¹æ•°
+    cout << log10(100) << endl;   // ä»¥10ä¸ºåº•çš„å¯¹æ•°
+    cout << cos(0) << endl;       // ä½™å¼¦
+    cout << sin(0) << endl;       // æ­£å¼¦
+    cout << exp(3) << endl;       // eçš„æŒ‡æ•°
+    //floor()å‘ä¸‹å–æ•´ ceil()å‘ä¸Šå–æ•´ round()å››èˆäº”å…¥
+    //ç”±äºæµ®ç‚¹æ•°çš„ç²¾åº¦æœ‰äº›æ•°å­—ä¼šæœ‰è¾ƒå°çš„è¯¯å·®
 }

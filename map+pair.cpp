@@ -15,11 +15,16 @@ int main() {
     cout << Username["密码"] << endl;
     // size() O(1) empyy() O(1) clear() O(1)
     // find(key) O(log(n))  count(key) O(1)
-
+    map<int, string> m = {{2, "apple"}, {1, "banana"}}; // O(log(n))
+    m[3] = "orange";                                    // O(log(n))
+    m.insert(make_pair(4, "pear"));                     // O(log(n))
+    for (auto x : m) {
+        cout << x.first << ":" << x.second << endl; // O(log(n))
+    } // map是有序的，按照key从小到大排序 key(前面的)为唯一值，value(后面的)可以重复
     // multimap与unordered_map不常用 可自行学习
 
     pair<string, int> p1("ligang", 2);
-    cout << p1.first << " " << p1.second << endl;
+    cout << p1.first << " " << p1.second << endl; // 用first和second访问pair的两个元素
     p1.first = "egg";
     cout << p1.first << endl;
     // pair 两个pair之间可以比较也可判断是否相等 按照字典顺序

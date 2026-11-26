@@ -112,6 +112,17 @@ try {
 } catch (e) {
   music = [];
 }
+let restoredMusic = 0;
+if (music.length === 0) {
+  try {
+    const prev = fs.readFileSync(outFile, 'utf8').replace(/^\s*window\.DATA\s*=\s*/, '').replace(/;\s*$/, '');
+    const arr = JSON.parse(prev).music;
+    if (Array.isArray(arr) && arr.length) {
+      music = arr.map((x) => x.file).filter((f) => f && path.basename(f) === f);
+      restoredMusic = music.length;
+    }
+  } catch (e) {}
+}
 
 const payload = {
   repo: 'https://github.com/Pineovex/c-study',
@@ -126,4 +137,4 @@ fs.writeFileSync(outFile, 'window.DATA = ' + JSON.stringify(payload, null, 2) + 
 
 console.log(`已生成 ${path.relative(repoRoot, outFile)}：${items.length} 个文件，${grouped.length} 个分类`);
 for (const i of items) console.log(`  [${i.cat}] ${i.file}  (${i.lines} 行)`);
-console.log(`  音乐 ${music.length} 首`);
+console.log(`  音乐 ${music.length} 首${restoredMusic ? `（本地音频文件缺失，沿用上一份 data.js 的列表）` : ''}`);

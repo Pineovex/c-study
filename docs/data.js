@@ -1,6 +1,6 @@
 window.DATA = {
   "repo": "https://github.com/Pineovex/c-study",
-  "generatedAt": "2026-11-25",
+  "generatedAt": "2026-11-26",
   "groups": [
     {
       "cat": "STL 容器",
@@ -124,5 +124,10 @@ window.DATA = {
       "code": "#include <iostream>\n#include <queue> //先进先出\n#include <stack> //先进后出\n// 栈与队列\nusing namespace std;\n\nint main() {\n    stack<int> st; // 原理类似于向瓶子里扔石子 先取最上端的数据\n    // st.size()元素个数\n    // st.empty()是否为空\n    st.push(3); // 压入一个元素进栈\n    st.push(2);\n    st.push(1);\n    cout << st.top() << \" \"; // 返回栈顶的数据\n    // st.pop() 弹出一个元素\n    st.pop(); // 1被弹出\n    cout << st.top() << endl;\n\n    queue<int> q; // 类似排队 先进先出\n    q.push(1);\n    q.push(2);\n    q.push(3);\n    cout << q.front() << \" \"; // 输出第一个数据\n    cout << q.back() << endl; // 输出最后的数据\n    q.pop();\n    cout << q.front() << \" \";\n    priority_queue<int> pq; // 优先队列（堆） 先进先出 但是会根据优先级排序\n    // 提供常数时间的访问最大元素的能力，对数时间的插入和删除元素的能力，底层原理是二叉树\n    pq.push(2);\n    pq.push(1);\n    pq.push(3);                                         // 默认是大顶堆\n    priority_queue<int, vector<int>, greater<int>> pq2; // 小顶堆\n    cout << pq.top() << endl;  // 输出最大值\n    cout << pq.size() << endl;  // 输出元素个数\n    pq.pop();// 删除顶端元素\n}"
     }
   },
-  "music": []
+  "music": [
+    {
+      "file": "松下優也 - Loving Loved.mp3",
+      "title": "松下優也 - Loving Loved"
+    }
+  ]
 };
